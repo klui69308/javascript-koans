@@ -4,17 +4,17 @@ describe("5. About Higher Order Functions", function () {
     var numbers = [1,2,3];
     var odd = numbers.filter(function (x) { return x % 2 !== 0 });
 
-    expect(odd).toEqual(FILL_ME_IN);
-    expect(odd.length).toBe(FILL_ME_IN);
-    expect(numbers.length).toBe(FILL_ME_IN);
+    expect(odd).toEqual([1,3]);
+    expect(odd.length).toBe(2);
+    expect(numbers.length).toBe(3);
   });
 
   it("should use 'map' to transform each element", function () {
     var numbers = [1, 2, 3];
     var numbersPlus1 = numbers.map(function(x) { return x + 1 });
 
-    expect(numbersPlus1).toEqual(FILL_ME_IN);
-    expect(numbers).toEqual(FILL_ME_IN);
+    expect(numbersPlus1).toEqual([2, 3, 4]);
+    expect(numbers).toEqual([1, 2, 3]);
   });
 
   it("should use 'forEach' for simple iteration", function () {
@@ -26,8 +26,8 @@ describe("5. About Higher Order Functions", function () {
 
     numbers.forEach(isEven);
 
-    expect(msg).toEqual(FILL_ME_IN);
-    expect(numbers).toEqual(FILL_ME_IN);
+    expect(msg).toEqual("falsetruefalse");
+    expect(numbers).toEqual([1,2,3]);
   });
 
   it("should use 'all' to test whether all items pass condition", function () {
@@ -36,8 +36,8 @@ describe("5. About Higher Order Functions", function () {
 
     var isEven = function(x) { return x % 2 === 0 };
 
-    expect(onlyEven.every(isEven)).toBe(FILL_ME_IN);
-    expect(mixedBag.every(isEven)).toBe(FILL_ME_IN);
+    expect(onlyEven.every(isEven)).toBe(true);
+    expect(mixedBag.every(isEven)).toBe(false);
   });
 
   it("should use 'any' to test if any items passes condition" , function () {
@@ -46,15 +46,15 @@ describe("5. About Higher Order Functions", function () {
 
     var isEven = function(x) { return x % 2 === 0 };
 
-    expect(onlyEven.some(isEven)).toBe(FILL_ME_IN);
-    expect(mixedBag.some(isEven)).toBe(FILL_ME_IN);
+    expect(onlyEven.some(isEven)).toBe(true);
+    expect(mixedBag.some(isEven)).toBe(true);
   });
 
   it("should write a function to filter out objects that match a criteria", function () {
     // return a filer people over 40
     var people = [{name: "bob", age: 41}, {name: "jane", age: 22},{name: "janet", age: 47},{name: "louis", age: 35}];
     var peopleOverFourty = people.filter(function (x) {
-      return FILL_ME_IN;
+      return x.age > 40;
     });
 
     expect(peopleOverFourty).toEqual([{name: "bob", age: 41}, {name: "janet", age: 47}]);
@@ -64,7 +64,7 @@ describe("5. About Higher Order Functions", function () {
     // return a list of everyone's age
     var people = [{name: "bob", age: 41}, {name: "jane", age: 22},{name: "janet", age: 47},{name: "louis", age: 35}];
     var names = people.map(function(x) {
-      return FILL_ME_IN;
+      return x.age;
     });
 
     expect(names).toEqual([41, 22, 47, 35]);
@@ -77,8 +77,8 @@ describe("5. About Higher Order Functions", function () {
     // arrayDiff([1,2,2,2,3],[2]) == [1,3]
 
     var arrayDiff = function(array1, array2) {
-      return array1.filter(function(){
-        return FILL_ME_IN;
+      return array1.filter(function(item){
+        return array2.every(item2 => item !== item2);
       });
     };
 
@@ -93,7 +93,12 @@ describe("5. About Higher Order Functions", function () {
     // turn the array back into a string
 
     var jadenCase = function(string){
-      return FILL_ME_IN;
+      var broken = string.split(" ");
+      var stringArr = broken.map(function(x) {
+        return x.charAt(0).toUpperCase() + x.substr(1).toLowerCase();; 
+      });
+      broken = stringArr.join(" ");
+      return broken;
     };
 
     expect(jadenCase("How can mirrors be real if our eyes aren't real")).toEqual("How Can Mirrors Be Real If Our Eyes Aren't Real");
@@ -103,8 +108,12 @@ describe("5. About Higher Order Functions", function () {
     var myFilter = function(arr, func){
       for(var i =0; i < arr.length; i++) {
         var arrayItem = arr[i];
-        return FILL_ME_IN;
+        var newArr = [];
+        if (func(arrayItem)) {
+          newArr.push(arrayItem);
+        }
       }
+      return newArr;
     };
 
     expect(myFilter([1,2,3], (i) => i > 2)).toEqual([3]);
