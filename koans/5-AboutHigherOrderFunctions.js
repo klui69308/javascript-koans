@@ -120,10 +120,12 @@ describe("5. About Higher Order Functions", function () {
   });
 
   it("can write your own map function using forEach", function() {
+    var newMap = [];
     var myMap = function(arr, func){
       arr.forEach(function(arrayItem) {
-        return FILL_ME_IN;
+        newMap.push(func(arrayItem));
       });
+      return newMap;
     };
 
     expect(myMap([1,2,3], (i) => i + 2)).toEqual([3,4,5]);
